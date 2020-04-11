@@ -51,10 +51,11 @@ public class Streams_part2 {
         System.out.println("age map     :" + agelist);
 
 
-        String str = "my name is bushy given";
+        String str1 = "my name is bushy given";
         //using grouping by
 
-        String[] words = str.split(" ");
+        String[] words = str1.split(" ");
+
         Map<String, List<String>> groupByMap = Stream.of(words)
                 .collect(Collectors.groupingBy(word -> word.substring(0, 1)));
 
@@ -70,6 +71,20 @@ public class Streams_part2 {
         System.out.println(groupByAndCounting);
         System.out.println(toMap);
 
+        Stream<String> ss = Stream.of("a", "b", "c");
+        String str = ss.collect(Collectors.joining(",", "-", "+"));
+        System.out.println(str);
 
+        List<String> vals = Arrays.asList("a", "b");
+        String join = vals.parallelStream()
+                .reduce("_", (a, b)->a.concat(b));
+
+        List<StringBuilder> messages = Arrays.asList(new StringBuilder(), new StringBuilder());
+        messages.stream().forEach(s->s.append("helloworld"));
+        messages.forEach(s->{
+            s.insert(5,",");
+            System.out.println(s);
+        });
     }
+
 }
